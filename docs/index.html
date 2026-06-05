@@ -9,7 +9,7 @@
       content="GitHub Pages documentation for the Qtivity DELETE method API."
     />
     <link rel="icon" href="assets/aizan-logo.svg" />
-    <link rel="stylesheet" href="styles.css?v=qtivity-1" />
+    <link rel="stylesheet" href="styles.css?v=qtivity-2" />
   </head>
   <body>
     <div class="page-shell">
@@ -67,28 +67,28 @@
               />
             </figure>
 
-            <h4>Plain Text</h4>
+            <h4>Example Request URL</h4>
             <div class="code-card inline-card">
               <div class="card-header">
-                <span></span>
+                <span>DELETE endpoint format</span>
                 <button type="button" data-copy="delete-template">Copy</button>
               </div>
-              <pre id="delete-template"><code>DELETE http://{backend_server_ip}:4000/api/calls/Cisco-Guid/{actual_cisco_guid}</code></pre>
+              <pre id="delete-template"><code>DELETE http://{backend_server_host}:4000/api/calls/Cisco-Guid/{actual_cisco_guid}</code></pre>
             </div>
 
             <p>
-              Replace <code>{backend_server_ip}</code> with the IP address of
-              your backend server and <code>{actual_cisco_guid}</code> with the
+              Replace <code>{backend_server_host}</code> with your configured
+              Qtivity backend host and <code>{actual_cisco_guid}</code> with the
               unique Cisco GUID of the call you want to release.
             </p>
 
-            <h4>Plain Text</h4>
+            <h4>Sample Request URL</h4>
             <div class="code-card inline-card">
               <div class="card-header">
-                <span></span>
+                <span>DELETE request example</span>
                 <button type="button" data-copy="delete-example">Copy</button>
               </div>
-              <pre id="delete-example"><code>DELETE http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72</code></pre>
+              <pre id="delete-example"><code>DELETE http://qtivity-backend.example.com:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72</code></pre>
             </div>
 
             <p>
@@ -96,10 +96,10 @@
               Qtivity platform.
             </p>
 
-            <h4>Plain Text</h4>
+            <h4>Success Response (200 OK)</h4>
             <div class="code-card inline-card">
               <div class="card-header">
-                <span></span>
+                <span>JSON response</span>
                 <button type="button" data-copy="success-response">Copy</button>
               </div>
               <pre id="success-response"><code>{
@@ -107,10 +107,10 @@
 }</code></pre>
             </div>
 
-            <h4>Plain Text</h4>
+            <h4>Error Response (404 Not Found)</h4>
             <div class="code-card inline-card">
               <div class="card-header">
-                <span></span>
+                <span>JSON response</span>
                 <button type="button" data-copy="not-found-response">Copy</button>
               </div>
               <pre id="not-found-response"><code>{
@@ -135,16 +135,16 @@
                   <td>http</td>
                 </tr>
                 <tr>
-                  <th>Parameter</th>
-                  <td>{backend_server_ip}<br />i.e 10.200.10.147 staging QX-backend server</td>
+                  <th>Backend host</th>
+                  <td><code>{backend_server_host}</code></td>
                 </tr>
                 <tr>
                   <th>Port</th>
                   <td>4000</td>
                 </tr>
                 <tr>
-                  <th>API Routes Parameter</th>
-                  <td>Cisco-Guid/{actual_cisco_guid}</td>
+                  <th>Path parameter</th>
+                  <td><code>{actual_cisco_guid}</code> identifies the active call to release.</td>
                 </tr>
               </tbody>
             </table>
@@ -178,7 +178,8 @@
                 </label>
                 <button type="button" data-copy="delete-call-request">Copy</button>
               </div>
-              <pre id="delete-call-request"><code></code></pre>
+              <pre id="delete-call-request"><code>curl --request DELETE \
+  --url 'http://qtivity-backend.example.com:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72'</code></pre>
             </div>
 
             <div class="code-card response-card">
@@ -190,14 +191,15 @@
                 <button class="is-active" type="button" data-response-tab="delete-call" data-response-code="200">200</button>
                 <button type="button" data-response-tab="delete-call" data-response-code="404">404</button>
               </div>
-              <pre id="delete-call-response" data-response-output="delete-call"><code></code></pre>
+              <pre id="delete-call-response" data-response-output="delete-call"><code>{
+  "success": true
+}</code></pre>
             </div>
           </aside>
         </section>
       </main>
     </div>
 
-    <script src="app.js?v=qtivity-1"></script>
+    <script src="app.js?v=qtivity-2"></script>
   </body>
 </html>
-

@@ -1,9 +1,11 @@
+const sampleDeleteUrl = "http://qtivity-backend.example.com:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72";
+
 const snippets = {
   curl: `curl --request DELETE \\
-  --url 'http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72'`,
+  --url '${sampleDeleteUrl}'`,
   ruby: `require "net/http"
 
-uri = URI("http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72")
+uri = URI("${sampleDeleteUrl}")
 request = Net::HTTP::Delete.new(uri)
 
 response = Net::HTTP.start(uri.hostname, uri.port) do |http|
@@ -12,32 +14,32 @@ end`,
   python: `import requests
 
 response = requests.delete(
-    "http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72"
+    "${sampleDeleteUrl}"
 )`,
   php: `<?php
-$ch = curl_init("http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72");
+$ch = curl_init("${sampleDeleteUrl}");
 curl_setopt_array($ch, [
   CURLOPT_CUSTOMREQUEST => "DELETE",
   CURLOPT_RETURNTRANSFER => true
 ]);
 $response = curl_exec($ch);`,
   java: `HttpRequest request = HttpRequest.newBuilder()
-  .uri(URI.create("http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72"))
+  .uri(URI.create("${sampleDeleteUrl}"))
   .DELETE()
   .build();`,
   node: `const response = await fetch(
-  "http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72",
+  "${sampleDeleteUrl}",
   { method: "DELETE" }
 );`,
   go: `req, _ := http.NewRequest(
   "DELETE",
-  "http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72",
+  "${sampleDeleteUrl}",
   nil,
 )`,
   dotnet: `using var client = new HttpClient();
 using var request = new HttpRequestMessage(
   HttpMethod.Delete,
-  "http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72"
+  "${sampleDeleteUrl}"
 );
 using var response = await client.SendAsync(request);`
 };
