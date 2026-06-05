@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aizan Qtivity API Documentation</title>
+    <meta
+      name="description"
+      content="GitHub Pages documentation for the Qtivity DELETE method API."
+    />
+    <link rel="icon" href="assets/aizan-logo.svg" />
+    <link rel="stylesheet" href="styles.css?v=qtivity-1" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar" aria-label="Qtivity sections">
+        <a class="brand" href="#delete-method" aria-label="Aizan documentation home">
+          <img src="assets/aizan-logo.svg" alt="Aizan" width="112" height="56" />
+        </a>
+
+        <nav class="section-nav">
+          <a class="is-active" href="#delete-method">DELETE Method - Qtivity API</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <span>Powered by</span>
+          <strong>Theneo</strong>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <label class="search" aria-label="Search sections">
+            <span class="search-icon" aria-hidden="true"></span>
+            <input id="section-search" type="search" placeholder="Search" />
+            <kbd>/</kbd>
+          </label>
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <span aria-hidden="true"></span>
+          </button>
+        </header>
+
+        <section class="doc-section" id="delete-method">
+          <div class="doc-copy">
+            <h1>DELETE Method - Qtivity API</h1>
+            <p>
+              Qtivity provides an API to support active call release
+              functionality. This document outlines how to use the DELETE method
+              to release active calls on the Qtivity platform gracefully.
+            </p>
+            <p>
+              By using the Cisco GUID, active calls can be released with ease.
+            </p>
+
+            <div class="notice">
+              <span aria-hidden="true">△</span>
+              <p>
+                <strong>Session-Lookup must be configured with Cisco-Guid in the Qtivity Portal.</strong>
+                Please find the reference screenshot.
+              </p>
+            </div>
+
+            <figure class="reference-image">
+              <img
+                src="https://theneo-prod-public.s3.amazonaws.com/images-1697005316853.png"
+                alt="Qtivity portal Session Lookup configured with Cisco-Guid"
+              />
+            </figure>
+
+            <h4>Plain Text</h4>
+            <div class="code-card inline-card">
+              <div class="card-header">
+                <span></span>
+                <button type="button" data-copy="delete-template">Copy</button>
+              </div>
+              <pre id="delete-template"><code>DELETE http://{backend_server_ip}:4000/api/calls/Cisco-Guid/{actual_cisco_guid}</code></pre>
+            </div>
+
+            <p>
+              Replace <code>{backend_server_ip}</code> with the IP address of
+              your backend server and <code>{actual_cisco_guid}</code> with the
+              unique Cisco GUID of the call you want to release.
+            </p>
+
+            <h4>Plain Text</h4>
+            <div class="code-card inline-card">
+              <div class="card-header">
+                <span></span>
+                <button type="button" data-copy="delete-example">Copy</button>
+              </div>
+              <pre id="delete-example"><code>DELETE http://127.0.0.1:4000/api/calls/Cisco-Guid/fb84cb3c-e20c-46d1-860e-532bea367c72</code></pre>
+            </div>
+
+            <p>
+              This API call triggers the release of an active call from the
+              Qtivity platform.
+            </p>
+
+            <h4>Plain Text</h4>
+            <div class="code-card inline-card">
+              <div class="card-header">
+                <span></span>
+                <button type="button" data-copy="success-response">Copy</button>
+              </div>
+              <pre id="success-response"><code>{
+  "success": true
+}</code></pre>
+            </div>
+
+            <h4>Plain Text</h4>
+            <div class="code-card inline-card">
+              <div class="card-header">
+                <span></span>
+                <button type="button" data-copy="not-found-response">Copy</button>
+              </div>
+              <pre id="not-found-response"><code>{
+  "message": "Channel not found"
+}</code></pre>
+            </div>
+
+            <p>
+              <strong>Expected Content Type for API Requests</strong>
+              When making API requests to Qtivity, specify the correct content
+              type to ensure successful communication.
+            </p>
+
+            <table>
+              <tbody>
+                <tr>
+                  <th>Method</th>
+                  <td>DELETE</td>
+                </tr>
+                <tr>
+                  <th>Protocol</th>
+                  <td>http</td>
+                </tr>
+                <tr>
+                  <th>Parameter</th>
+                  <td>{backend_server_ip}<br />i.e 10.200.10.147 staging QX-backend server</td>
+                </tr>
+                <tr>
+                  <th>Port</th>
+                  <td>4000</td>
+                </tr>
+                <tr>
+                  <th>API Routes Parameter</th>
+                  <td>Cisco-Guid/{actual_cisco_guid}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="feedback" aria-label="Section feedback">
+              <span>Was this section helpful?</span>
+              <button type="button">Yes</button>
+              <button type="button">No</button>
+            </div>
+          </div>
+
+          <aside class="example-stack" aria-label="Qtivity examples">
+            <div class="code-card endpoint-card" data-snippet="delete-call">
+              <div class="endpoint-card-header">
+                <div>
+                  <span class="method delete">DELETE</span>
+                  <strong>/api/calls/Cisco-Guid/{actual_cisco_guid}</strong>
+                </div>
+                <label>
+                  <span class="sr-only">Request language</span>
+                  <select data-language-select="delete-call" aria-label="Request language">
+                    <option value="curl">cURL</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="python">Python</option>
+                    <option value="php">PHP</option>
+                    <option value="java">Java</option>
+                    <option value="node">Node.js</option>
+                    <option value="go">Go</option>
+                    <option value="dotnet">.NET</option>
+                  </select>
+                </label>
+                <button type="button" data-copy="delete-call-request">Copy</button>
+              </div>
+              <pre id="delete-call-request"><code></code></pre>
+            </div>
+
+            <div class="code-card response-card">
+              <div class="card-header">
+                <span>Response</span>
+                <button type="button" data-copy="delete-call-response">Copy</button>
+              </div>
+              <div class="response-tabs">
+                <button class="is-active" type="button" data-response-tab="delete-call" data-response-code="200">200</button>
+                <button type="button" data-response-tab="delete-call" data-response-code="404">404</button>
+              </div>
+              <pre id="delete-call-response" data-response-output="delete-call"><code></code></pre>
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <script src="app.js?v=qtivity-1"></script>
+  </body>
+</html>
+
