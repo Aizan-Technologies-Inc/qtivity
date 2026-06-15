@@ -65,6 +65,85 @@ function updateSearch(query) {
   history.replaceState(null, "", `#${firstMatch}`);
 }
 
+const escapeHtml = (value) =>
+  String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+function setupThemeToggle() {
+  const themeToggle = document.querySelector(".theme-toggle");
+  const storedTheme = (() => {
+    try {
+      return localStorage.getItem("aizan-docs-theme");
+    } catch {
+      return null;
+    }
+  })();
+
+  const applyTheme = (theme) => {
+    const nextTheme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = nextTheme;
+    themeToggle?.setAttribute("aria-pressed", String(nextTheme === "dark"));
+    themeToggle?.setAttribute(
+      "title",
+      nextTheme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+    );
+
+    try {
+      localStorage.setItem("aizan-docs-theme", nextTheme);
+    } catch {
+      // Storage can be unavailable in some browser privacy modes.
+    }
+  };
+
+  applyTheme(storedTheme === "dark" ? "dark" : "light");
+
+  themeToggle?.addEventListener("click", () => {
+    applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  });
+}
+
+function renderUtilitySections() {
+  const content = document.querySelector(".content");
+  if (!content || document.getElementById("api-explorer")) return;
+
+  const cards = navLinks
+    .map((link) => {
+      const id = link.getAttribute("href")?.slice(1);
+      const section = id ? document.getElementById(id) : null;
+      const title = link.textContent.trim();
+      const summary = section?.querySelector("p")?.textContent.trim() || "Open this documentation section.";
+
+      return `<a class="explorer-card" href="#${escapeHtml(id)}">
+        <span>DELETE</span>
+        <strong>${escapeHtml(title)}</strong>
+        <p>${escapeHtml(summary)}</p>
+      </a>`;
+    })
+    .join("");
+
+  content.insertAdjacentHTML(
+    "beforeend",
+    `<section class="utility-section" id="api-explorer">
+      <h1>API Explorer</h1>
+      <p>Use this compact endpoint index to jump directly into the Qtivity API documentation.</p>
+      <div class="explorer-grid">${cards}</div>
+    </section>
+    <section class="utility-section" id="changelog">
+      <h1>Changelog</h1>
+      <ol class="changelog-list">
+        <li><strong>Current GitHub Pages build</strong><span>Search filters sections, API Explorer links to each endpoint, and the light/dark theme toggle is active.</span></li>
+        <li><strong>Qtivity migration</strong><span>Recreated the DELETE method documentation as a static GitHub Pages site.</span></li>
+      </ol>
+    </section>`
+  );
+}
+
+setupThemeToggle();
+renderUtilitySections();
+
 const snippets = {
   curl: `curl --request DELETE \\
   --url '${sampleDeleteUrl}'`,
